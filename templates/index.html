@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bug Triage Predictor</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 2em; background-color: #f0f2f5; color: #333; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 2em; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h1 { color: #1a1a1a; }
+        h2 { color: #0056b3; }
+        input[type="text"], textarea { width: 95%; margin-bottom: 12px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
+        input[type="submit"] { width: 100%; padding: 12px; background-color: #0056b3; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 18px; font-weight: bold; }
+        input[type="submit"]:hover { background-color: #004494; }
+        .result { margin-top: 25px; padding: 15px; background-color: #e7f3ff; border-left: 5px solid #0056b3; }
+        .result p { margin: 5px 0; font-size: 16px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bug Triage Predictor</h1>
+        <p>Enter the details of a bug report to predict the responsible team and its priority.</p>
+        
+        <form action="/" method="post">
+            <textarea name="sd" rows="4" placeholder="Short Description (e.g., App crashes on startup)" required></textarea><br>
+            <input type="text" name="pd" placeholder="Product (e.g., JDT)" required><br>
+            <input type="text" name="os" placeholder="OS (e.g., Windows)" required><br>
+            <input type="text" name="bs" placeholder="Severity (e.g., normal)" required><br>
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction_component and prediction_priority %}
+            <div class="result">
+                <h2>Prediction Result:</h2>
+                <p><strong>Predicted Component:</strong> {{ prediction_component }}</p>
+                <p><strong>Predicted Priority:</strong> {{ prediction_priority }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
