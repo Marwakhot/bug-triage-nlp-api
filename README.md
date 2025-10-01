@@ -36,3 +36,50 @@ This repository contains two different web applications that use the same traine
 ├── Dockerfile  
 ├── requirements.txt  
 └── test_api.py  
+
+---
+
+## How to Run
+### 1. Local Setup (Without Docker)
+**Step 1: Clone the repository and set up the environment**
+```bash
+git clone [https://github.com/your-username/your-repo-name.git](https://github.com/Marwakhot/bug-triage-nlp-api.git)
+cd bug-triage-nlp-api
+
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt 
+```
+**Step 2: Generate the Model File**  
+Before you can run the applications, you must generate the model file.  
+Open and run the `notebooks/01-data-cleaning.ipynb` notebook from top to bottom.   
+Then, open and run the `notebooks/02-model-training.ipynb` notebook. This will create the `final_multimodel.pkl` file.
+
+**Step 3: Run an Application**
+You can now run either the Flask app or the Streamlit dashboard.
+- To run the Streamlit Dashboard (Recommended):
+  ```bash
+  streamlit run dashboard.py
+  ```
+  Then open your browser to http://localhost:8501
+
+- To run the Flask App:
+  ```bash
+  python app.py
+  ```
+  Then open your browser to http://localhost:8080
+
+### 2. Docker Setup (Recommended)
+Prerequisite: You must have Docker Desktop installed and running.  
+Step 1: Build the Docker image
+In your terminal, from the project's root directory, run:
+```bash
+docker build -t bug-triage-dashboard .
+```
+Step 2: Run the Docker container
+This will start the Streamlit dashboard.
+```bash
+docker run -p 8501:8501 bug-triage-dashboard
+```
+Now, open your web browser and go to http://localhost:8501
+  
